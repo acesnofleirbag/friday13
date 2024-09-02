@@ -2,13 +2,8 @@
 #define F13_LEXER_H
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
-
-typedef struct {
-    char *buffer;
-    char ch;
-    uint64_t i;
-} Lexer;
 
 typedef enum {
     TOKEN__DIGIT,
@@ -22,11 +17,28 @@ typedef enum {
     TOKEN__OPEN_CURLY,
     TOKEN__CLOSE_CURLY,
     TOKEN__NULL,
-} Token;
+    TOKEN__INVALID,
+} TokenType;
+
+typedef struct {
+    char *buffer;
+    char ch;
+    uint64_t i;
+    struct {
+        size_t x, y;
+    } location;
+    struct {
+        size_t len;
+        TokenType *data;
+    } tokens;
+} Lexer;
 
 Lexer Lexer__new();
 void Lexer__scan(Lexer *lexer, const char *path);
 void Lexer__next(Lexer *lexer);
 bool Lexer__is_whitespace(char ch);
+TokenType Lexer__identify(char ch);
+void Lexer__add_token(Lexer *lexer, TokenType token);
+void Lexer__release(Lexer *lexer);
 
 #endif

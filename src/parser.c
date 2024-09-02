@@ -10,5 +10,5 @@ Parser__new(Lexer *lexer) {
 
 void
 Parser__run(Parser *parser) {
-    (void)(parser);
+    (void) (parser);
 }

@@ -8,7 +8,7 @@ panic(const char *fmt, ...) {
 
     va_start(args, fmt);
 
-    fprintf(stderr, "ERROR: ");
+    fprintf(stderr, "ERROR(friday13): ");
     vfprintf(stderr, fmt, args);
     fprintf(stderr, "\n");
 

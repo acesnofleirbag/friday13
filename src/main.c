@@ -10,5 +10,7 @@ main(void) {
     Parser parser = Parser__new(&lexer);
     Parser__run(&parser);
 
+    Lexer__release(&lexer);
+
     return 0;
 }
